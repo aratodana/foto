@@ -1,0 +1,56 @@
+/*
+This styleSheet created by Arató Dániel
+Version: 1.0.1.0
+*/
+@media only screen and (min-width: 992px)
+{
+	div.login_settingsCard
+	{
+		margin-top: 20px;
+		width: 90vw;
+		margin-left: 5vw;
+		padding: 10px;
+	}
+
+	div.login_settingsCard_big
+	{
+		margin-top: 20px;
+		margin-bottom: 30px;
+	}
+}
+
+@media only screen and (max-width: 992px)
+{
+	div.login_settingsCard
+	{
+		margin-top: 20px;
+		width: 90vw;
+		margin-left: 5vw;
+		padding: 10px;
+	}
+
+	div.login_settingsCard_big
+	{
+		margin-top: 20px;
+		margin-bottom: 30px;
+	}
+}
+
+@media only screen and (orientation: portrait)
+{
+	div.login_settingsCard
+	{
+		margin-top: 20px;
+		width: 90vw;
+		margin-left: 5vw;
+		padding: 10px;
+		overflow: scroll;
+	}
+
+	div.login_settingsCard_big
+	{
+		margin-top: 20px;
+		width: 100vw;
+		margin-bottom: 30px;
+	}
+}

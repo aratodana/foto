@@ -1,0 +1,58 @@
+
+/*
+div#footer
+{
+	
+	margin: 0 auto;
+	width: 100vw;
+	background-color: #333A40;
+    padding: 10px;
+    position: absolute;
+
+}
+
+
+div#footer p
+{
+	color: white;
+}
+*/
+
+
+html
+{
+	margin: 0;
+	padding: 0;
+}
+
+body
+{
+	margin: 0;
+	padding: 0;
+}
+
+#main-wrapper
+{
+    padding: 0;
+    margin: 0;
+    position: relative;
+    background-color: #333A40;
+    bottom: 0;
+}
+
+footer {
+    bottom: -100px;
+    min-height: 100px;
+    left: 0;
+    position: absolute;
+    width: 100%;
+    background-color: #333A40;
+    padding: 10px;
+}
+
+footer p
+{
+	color: white;
+	margin: 0;
+	padding: 0;
+}

@@ -1,0 +1,36 @@
+/*
+This styleSheet created by Arató Dániel
+Version: 1.0.0.0
+*/
+@media only screen and (min-width: 992px)
+{
+	div#loginForm
+	{
+		width: 40vw;
+		padding: 20px;
+		margin-left: 30vw;
+		margin-top: 10vh;
+	}
+}
+
+@media only screen and (max-width: 992px)
+{
+	div#loginForm
+	{
+		width: 40vw;
+		padding: 20px;
+		margin-left: 30vw;
+		margin-top: 10vh;
+	}
+}
+
+@media only screen and (orientation: portrait)
+{
+	div#loginForm
+	{
+		width: 90vw;
+		padding: 20px;
+		margin-left: 5vw;
+		margin-top: 10vh;
+	}
+}

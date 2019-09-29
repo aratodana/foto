@@ -1,0 +1,45 @@
+/*
+This styleSheet created by Arató Dániel
+Version: 1.0.0.0
+*/
+
+@media only screen and (min-width: 992px)
+{
+	body
+	{
+		margin: 0;
+		padding: 0;
+		background-image: url(../images/background.jpg);
+		background-attachment: fixed;
+		background-size: 100vw auto;
+		background-repeat: no-repeat;
+		background-position: center;
+	}
+}
+
+
+@media only screen and (max-width: 992px)
+{
+	body
+	{
+		margin: 0;
+		padding: 0;
+		background-image: url(../images/background.jpg);
+		background-size: 100vw calc(100vh + 30px);
+		background-repeat: no-repeat;
+		background-position: center;
+	}
+}
+
+
+@media only screen and (orientation: portrait)
+{
+	body
+	{
+		background-image: url(../images/background_mobile.jpg);
+		background-attachment: fixed;
+		background-size: auto 100vh;
+		background-repeat: no-repeat;
+		background-position: center;
+	}
+}

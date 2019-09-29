@@ -1,0 +1,106 @@
+/*
+This styleSheet created by Arató Dániel
+Version: 1.0.0.0
+*/
+@media only screen and (min-width: 992px)
+{
+	div.contactOfUser
+	{
+		width: 90vw;
+		margin-left: 5vw;
+		margin-top: 20px;
+		padding: 10px;
+	}
+
+	.modal .modal-dialog .modal-content
+	{
+		width: 70vw;
+		height: 70vh;
+	}
+
+	.modal-dialog
+	{
+		margin: 0;
+		padding: 0;
+	}
+
+	.modal
+	{
+		margin-top: 15vh;
+		margin-left: 15vw;
+	}
+
+	.modal-body
+	{
+		overflow: scroll;
+	}
+}
+
+@media only screen and (max-width: 992px)
+{
+	div.contactOfUser
+	{
+		width: 90vw;
+		margin-left: 5vw;
+		margin-top: 20px;
+		padding: 10px;
+	}
+
+	.modal .modal-dialog .modal-content
+	{
+		width: 90vw;
+		height: 90vh;
+	}
+
+	.modal-dialog
+	{
+		margin: 0;
+		padding: 0;
+	}
+
+	.modal
+	{
+		margin-top: 5vh;
+		margin-left: 5vw;
+	}
+
+	.modal-body
+	{
+		overflow: scroll;
+	}
+}
+
+@media only screen and (orientation: portrait)
+{
+	div.contactOfUser
+	{
+		width: 90vw;
+		margin-left: 5vw;
+		margin-top: 20px;
+		padding: 10px;
+		overflow: scroll;
+	}
+
+	.modal .modal-dialog .modal-content
+	{
+		width: 90vw;
+		height: 90vh;
+	}
+
+	.modal-dialog
+	{
+		margin: 0;
+		padding: 0;
+	}
+
+	.modal
+	{
+		margin-top: 5vh;
+		margin-left: 5vw;
+	}
+
+	.modal-body
+	{
+		overflow: scroll;
+	}
+}

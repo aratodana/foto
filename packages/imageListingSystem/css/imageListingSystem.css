@@ -1,0 +1,326 @@
+/*
+This styleSheet created by Arató Dániel
+Version: 1.0.1.0
+*/
+@media only screen and (min-width: 992px)
+{
+	div.profileBox
+	{
+		width: 100vw;
+		height: 100vh;
+		/*background-image: url(../uploads/covers/aratodana.jpg);*/
+		background-size: 100vw auto;
+		background-repeat: no-repeat;
+		background-position: center;
+	}
+
+	div#introdutionBox
+	{
+		width: 40vw;
+		margin-left: auto;
+		bottom: 0;
+		position: absolute;
+	}
+
+	div#profileBox div#introdutionBox p
+	{
+		color: white;
+		font-size: 20px;
+	}
+
+	div#profileBox div#introdutionBox h1
+	{
+		color: white;
+	}
+
+	div.albumLinkCard
+	{
+		width: 25vw;
+		margin-bottom: 30px;
+		margin-left: calc(25vw / 4);
+		float: left;
+		position: relative;
+	}
+
+	div#albumList
+	{
+		margin-top: 30px;
+		width: 100vw;
+		min-height: 100vh;
+	}
+
+	img.albumThumbnail
+	{
+		width: 30vw;
+	}
+
+	div#albumDiv h1
+	{	
+		margin-top: 20px;
+		margin-bottom: 20px;
+	}
+
+	div#albumDiv
+	{
+		margin-left: 5vw;
+		min-height: 100vh;
+	}
+
+	.modal .modal-dialog .modal-content img
+	{
+		width: 70vw;
+
+	}
+
+	.modal-dialog
+	{
+		margin: 0;
+		padding: 0;
+	}
+
+	.modal
+	{
+		margin-top: 10vh;
+		margin-left: 15vw;
+	}
+
+	.myCloseButton
+	{
+		width: 10px;
+		 background:transparent;	
+	}
+
+	.pictureControllBar button
+	{
+		background-color: blue;
+	}
+
+	div#pictureControllBar
+	{
+		float: left;
+		position: absolute;
+		z-index: 10;
+	}
+
+	p
+	{
+		margin: 0;
+	}
+
+	h1
+	{
+		margin: 0;
+	}
+}
+
+@media only screen and (max-width: 992px)
+{
+	div.profileBox
+	{
+		width: 100vw;
+		height: 100vh;
+		background-size: auto 100vh;
+		background-repeat: no-repeat;
+		background-position: center;
+	}
+
+	div#introdutionBox
+	{
+		width: 40vw;
+		margin-left: auto;
+		bottom: 0;
+		position: absolute;
+	}
+
+	div#profileBox div#introdutionBox p
+	{
+		color: white;
+		font-size: 20px;
+	}
+
+	div#profileBox div#introdutionBox h1
+	{
+		color: white;
+	}
+
+	div.albumLinkCard
+	{
+		width: 25vw;
+		margin-bottom: 30px;
+		margin-left: calc(25vw / 4);
+		float: left;
+	}
+
+	div#albumList
+	{
+		margin-top: 30px;
+		width: 100vw;
+		min-height: 80vh;
+	}
+
+	img.albumThumbnail
+	{
+		width: 30vw;
+	}
+
+	div#albumDiv h1
+	{	
+		margin-top: 20px;
+		margin-bottom: 20px;
+	}
+
+	div#albumDiv
+	{
+		margin-left: 5vw;
+	}
+
+	.modal .modal-dialog .modal-content img
+	{
+		width: 90vw;
+	}
+
+	.modal-dialog
+	{
+		margin: 0;
+		padding: 0;
+	}
+
+	.modal
+	{
+		margin-top: 5vh;
+		margin-left: 5vw;
+	}
+
+	.myCloseButton
+	{
+		width: 10px;
+		 background:transparent;	
+	}
+
+	div#pictureControllBar
+	{
+		float: left;
+		position: absolute;
+		z-index: 10;
+	}
+
+	p
+	{
+		margin: 0;
+	}
+
+	h1
+	{
+		margin: 0;
+	}
+}	
+
+@media only screen and (orientation: portrait)
+{
+	div.profileBox
+	{
+		width: 100vw;
+		height: 100vh;
+		background-size: auto 100vh;
+		background-repeat: no-repeat;
+		background-position: center;
+	}
+
+	div#introdutionBox
+	{
+		width: 40vw;
+		margin-left: auto;
+		bottom: 0;
+		position: absolute;
+	}
+
+	div#profileBox div#introdutionBox p
+	{
+		color: white;
+		font-size: 20px;
+	}
+
+	div#profileBox div#introdutionBox h1
+	{
+		color: white;
+	}
+
+	div.albumLinkCard
+	{
+		width: 90vw;
+		margin-bottom: 30px;
+		float: left;
+	}
+
+	.cardBody
+	{
+		max-height: 30px !important;
+	}
+
+	div#albumList
+	{
+		margin-top: 30px;
+		width: 100vw;
+		min-height: 100vh;
+		display: inline-block;
+	}
+
+	img.albumThumbnail
+	{
+		width: 30vw;
+	}
+
+	div#albumDiv h1
+	{	
+		margin-top: 20px;
+		margin-bottom: 20px;
+	}
+
+	div#albumDiv
+	{
+		margin-left: 5vw;
+		min-height: 90vh;
+	}
+
+	.modal .modal-dialog .modal-content img
+	{
+		width: 90vw;
+	}
+
+	.modal-dialog
+	{
+		margin: 0;
+		padding: 0;
+	}
+
+	.modal
+	{
+		margin-top: 5vh;
+		margin-left: 5vw;
+	}
+
+	.myCloseButton
+	{
+		width: 10px;
+		 background:transparent;	
+	}
+
+/*
+	div#pictureControllBar
+	{
+		float: left;
+		position: absolute;
+		z-index: 10;
+	}
+	*/
+
+	p
+	{
+		margin: 0;
+	}
+
+	h1
+	{
+		margin: 0;
+	}
+}	
