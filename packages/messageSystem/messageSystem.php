@@ -88,7 +88,7 @@ ___  ___                                 _____           _
 
 			$query = "SELECT * FROM KONTAKTOK INNER JOIN KONTAKT_TIPUSOK ON KONTAKTOK.TIPUS = KONTAKT_TIPUSOK.ID WHERE TULAJ = ? AND PUBLIKUS = 1;";
 			$stmt = $this->conn_public->prepare($query);
-			$stmt->bind_param('i', $albumId);
+			$stmt->bind_param('s', $userName);
 			$stmt->execute();
 			$result = $stmt->get_result();
 
