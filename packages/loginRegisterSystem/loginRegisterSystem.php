@@ -116,7 +116,7 @@ WARNING: HEAD CAN'T BE ON THE index.php
 			$email = antiHackingSystem::testString($_POST['loginEmail']);
 			$password = antiHackingSystem::testString($_POST['loginPassword']);
 			
-			$query = "SELECT NICKNEV, ADMIN FROM FELHASZNALO_PRIVATE WHERE (EMAIL = ? OR NICKNEV = ?) AND MD5(?) = JELSZO;";
+			$query = "SELECT NICKNEV, ADMIN FROM FELHASZNALO_PRIVATE WHERE (EMAIL = ? OR NICKNEV = ?) AND SHA2(?, 512) = JELSZO;";
 
 			$stmt = $this->conn_private->prepare($query);
 
@@ -165,7 +165,7 @@ WARNING: HEAD CAN'T BE ON THE index.php
 			$result = $stmt->get_result();
 
 
-			$sql = "INSERT INTO FELHASZNALO_PRIVATE (EMAIL, NICKNEV, JELSZO) VALUES ('$email', '$username', MD5(?))";
+			$sql = "INSERT INTO FELHASZNALO_PRIVATE (EMAIL, NICKNEV, JELSZO) VALUES ('$email', '$username', SHA2(?, 512))";
 			$stmt = $this->conn_private->prepare($sql);
 			$stmt->bind_param('s', $password1);
 
