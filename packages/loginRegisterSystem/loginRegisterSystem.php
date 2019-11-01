@@ -115,11 +115,18 @@ WARNING: HEAD CAN'T BE ON THE index.php
 		{
 			$email = antiHackingSystem::testString($_POST['loginEmail']);
 			$password = antiHackingSystem::testString($_POST['loginPassword']);
+			
+			$query = "SELECT NICKNEV, ADMIN FROM FELHASZNALO_PRIVATE WHERE (EMAIL = ? OR NICKNEV = ?) AND MD5(?) = JELSZO;";
 
-			$query = "SELECT NICKNEV, ADMIN FROM FELHASZNALO_PRIVATE WHERE (EMAIL = '$email' OR NICKNEV = '$email') AND MD5('$password') = JELSZO;";
+			$stmt = $this->conn_private->prepare($query);
 
-			$result = $this->conn_private->query($query);
+			$stmt->bind_param('sss', $email, $email, $password);
 
+			$stmt->execute();
+			$result = $stmt->get_result();
+
+
+			
 			if($result->num_rows != 1)	return "Hibás felhasználónév vagy jelszó";
 
 			$row= $result->fetch_assoc();
@@ -141,17 +148,35 @@ WARNING: HEAD CAN'T BE ON THE index.php
 
 			if($password1 != $password2) return "A két jelszó nem egyezik";
 
-			$sql = "SELECT * FROM REGISZTRACIOS_KOD WHERE KOD='$registerCode';";
-			$result = $this->conn_private->query($sql);
+			$sql = "SELECT * FROM REGISZTRACIOS_KOD WHERE KOD=?;";
+			$stmt = $this->conn_private->prepare($sql);
+			$stmt->bind_param('s', $registerCode);
+
+			$stmt->execute();
+			$result = $stmt->get_result();
+
 			if($result->num_rows != 1)	return "Hibás a regisztrációs kód";
-			$sql = "DELETE FROM REGISZTRACIOS_KOD WHERE KOD='$registerCode';";
-			$result = $this->conn_private->query($sql);
+			
+			$sql = "DELETE FROM REGISZTRACIOS_KOD WHERE KOD=?;";
+			$stmt = $this->conn_private->prepare($sql);
+			$stmt->bind_param('?', $registerCode);
+			
+			$stmt->execute();
+			$result = $stmt->get_result();
 
 
-			$sql = "INSERT INTO FELHASZNALO_PRIVATE (EMAIL, NICKNEV, JELSZO) VALUES ('$email', '$username', MD5('$password1'))";
-			$this->conn_private->query($sql);
-			$sql = "INSERT INTO FELHASZNALO_PUBLIC (NICKNEV, BEMUTATKOZAS) VALUES ('$username', '')";
-			$this->conn_public->query($sql);
+			$sql = "INSERT INTO FELHASZNALO_PRIVATE (EMAIL, NICKNEV, JELSZO) VALUES ('$email', '$username', MD5(?))";
+			$stmt = $this->conn_private->prepare($sql);
+			$stmt->bind_param('s', $password1);
+
+			$stmt->execute();
+			
+
+			$sql = "INSERT INTO FELHASZNALO_PUBLIC (NICKNEV, BEMUTATKOZAS) VALUES (?, '')";
+			$stmt = $this->conn_private->prepare($sql);
+			$stmt->bind_param('s', $username);
+
+			$stmt->execute();
 			return "A regisztráció sikeres";
 		}
 

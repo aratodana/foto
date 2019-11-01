@@ -38,9 +38,9 @@ Version: 1.0.1.0
 
 		private static function getPrivate()
 		{
-            $database = "foto_priv";
+            $database = "PHOTOSITE_PRIVATE";
             $adress = "localhost";
-            $username = "";
+            $username = "root";
             $password = "";
 
 			$conn = new mysqli($adress, $username, $password, $database);
@@ -50,9 +50,9 @@ Version: 1.0.1.0
 
 		private static function getLog()
 		{
-            $database = "foto_logs";
+            $database = "PHOTOSITE_LOGS";
             $adress = "localhost";
-            $username = "";
+            $username = "root";
             $password = "";
 
 			$conn = new mysqli($adress, $username, $password, $database);
@@ -62,9 +62,9 @@ Version: 1.0.1.0
 
 		private static function getPublic()
 		{
-            $database = "foto_pub";
+            $database = "PHOTOSITE_PUBLIC";
             $adress = "localhost";
-            $username = "";
+            $username = "root";
             $password = "";
 
 			$conn = new mysqli($adress, $username, $password, $database);

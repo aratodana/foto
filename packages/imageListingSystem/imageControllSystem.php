@@ -73,8 +73,12 @@ Version: 1.1.1.2
 		{
 			$s = "<div class='card image_settingsCard'><h1>Albumok</h1><table class='table table-hover'>";
 
-			$sql = "SELECT * FROM ALBUM WHERE TULAJ = '$userName'";
-			$result = $this->conn_public->query($sql);
+			$query = "SELECT * FROM ALBUM WHERE TULAJ = ?";
+			
+			$stmt = $this->conn_public->prepare($query);
+			$stmt->bind_param('s', $userName);
+			$stmt->execute();
+			$result = $stmt->get_result();
 
 				if($result->num_rows > 0)
 				{
@@ -93,8 +97,11 @@ Version: 1.1.1.2
 
 		public function addNewAlbum()
 		{
-			$sql = "INSERT INTO ALBUM (NEV, TULAJ, LEIRAS) VALUES ('Új album', '$this->username', '')";
-			$this->conn_public->query($sql);
+			$query = "INSERT INTO ALBUM (NEV, TULAJ, LEIRAS) VALUES ('Új album', ?, '')";
+			
+			$stmt = $this->conn_public->prepare($query);
+			$stmt->bind_param('s', $this->username);
+			$stmt->execute();
 		}
 
 		public function getIncludes()
@@ -104,10 +111,18 @@ Version: 1.1.1.2
 
 		public function deleteAlbum($albumId)
 		{
-			$sql = "DELETE KEP, POZICIOK FROM KEP INNER JOIN POZICIOK ON POZICIOK.KEPID = KEP.ID WHERE ALBUMID=$albumId;";
-			$this->conn_public->query($sql);
-			$sql = "DELETE FROM ALBUM WHERE ID = $albumId";
-			$this->conn_public->query($sql);
+			$query = "DELETE KEP, POZICIOK FROM KEP INNER JOIN POZICIOK ON POZICIOK.KEPID = KEP.ID WHERE ALBUMID=?;";
+			
+			$stmt = $this->conn_public->prepare($query);
+			$stmt->bind_param('i', $albumId);
+			$stmt->execute();
+
+
+			$query = "DELETE FROM ALBUM WHERE ID = ?";
+			
+			$stmt = $this->conn_public->prepare($query);
+			$stmt->bind_param('i', $albumId);
+			$stmt->execute();
 		}
 
 		//Edit albums
@@ -115,8 +130,12 @@ Version: 1.1.1.2
 		{
 			$s = "<div class='card image_settingsCard'>";
 
-			$sql = "SELECT * FROM ALBUM WHERE ID = $albumId";
-			$result = $this->conn_public->query($sql);
+			$query = "SELECT * FROM ALBUM WHERE ID =?";
+
+			$stmt = $this->conn_public->prepare($query);
+			$stmt->bind_param('i', $albumId);
+			$stmt->execute();
+			$result = $stmt->get_result();
 
 				if($result->num_rows > 0)
 				{
@@ -162,8 +181,11 @@ Version: 1.1.1.2
 
 		public function setAlbumProperties($albumName, $introdution, $albumId)
 		{
-			$sql = "UPDATE ALBUM SET NEV='$albumName', LEIRAS='$introdution' WHERE ID='$albumId';";
-			$this->conn_public->query($sql);
+			$query = "UPDATE ALBUM SET NEV='$albumName', LEIRAS='$introdution' WHERE ID=?;";
+			
+			$stmt = $this->conn_public->prepare($query);
+			$stmt->bind_param('s', $albumId);
+			$stmt->execute();
 		}
 
 
@@ -196,8 +218,14 @@ Version: 1.1.1.2
 					{
 
 						//Adding picture to database
-						$sql = "INSERT INTO KEP (TULAJ) VALUES ('$owner');";
-						$this->conn_public->query($sql);
+						$query = "INSERT INTO KEP (TULAJ) VALUES (?);";
+						
+						$stmt = $this->conn_public->prepare($query);
+						$stmt->bind_param('s', $owner);
+						$stmt->execute();
+						$result = $stmt->get_result();
+
+
 						$lastId = mysqli_insert_id($this->conn_public);
 						$target_file = $target_dir . $img_tag . $lastId . ".jpg";
 						$file_tmp=$_FILES["picture"]["tmp_name"][$i];
@@ -233,8 +261,12 @@ Version: 1.1.1.2
 						imagedestroy($mediumPicture);
 						
 
-						$sql = "INSERT INTO POZICIOK (ALBUMID, KEPID, X, Y) VALUES ('$albumId', '$lastId', '$x', '$y');";
-						$this->conn_public->query($sql);
+						$sql = "INSERT INTO POZICIOK (ALBUMID, KEPID, X, Y) VALUES (?, ?, ?, ?);";
+						
+						$stmt = $this->conn_public->prepare($query);
+						$stmt->bind_param('iiii', $albumId, $lastId, $x, $y);
+						$stmt->execute();
+						$result = $stmt->get_result();
 
 						//Add to album
 						$x++;

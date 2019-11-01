@@ -105,8 +105,13 @@ WARNING: THE FOLDERS MUST BE WRITEABLE
 
 		public function getAlbumTumbnail($albumId)
 		{
-			$sql = "SELECT * FROM POZICIOK INNER JOIN KEP ON POZICIOK.KEPID = KEP.ID INNER JOIN ALBUM ON POZICIOK.ALBUMID = ALBUM.ID WHERE ALBUM.ID='$albumId' ORDER BY POZICIOK.Y ASC, POZICIOK.X ASC LIMIT 1;";
-			$result = $this->conn_public->query($sql);
+			$query = "SELECT * FROM POZICIOK INNER JOIN KEP ON POZICIOK.KEPID = KEP.ID INNER JOIN ALBUM ON POZICIOK.ALBUMID = ALBUM.ID WHERE ALBUM.ID=? ORDER BY POZICIOK.Y ASC, POZICIOK.X ASC LIMIT 1;";
+					
+			$stmt = $this->conn_public->prepare($query);
+			$stmt->bind_param('i', $albumId);
+			$stmt->execute();
+			$result = $stmt->get_result();
+
 			$s = "";
 			if($result->num_rows > 0)
 			{
@@ -153,8 +158,12 @@ WARNING: THE FOLDERS MUST BE WRITEABLE
 
 		public function getUserCover($username)
 		{
-			$sql = "SELECT * FROM FELHASZNALO_PUBLIC WHERE NICKNEV = '$username';";
-			$result = $this->conn_public->query($sql);
+			$query = "SELECT * FROM FELHASZNALO_PUBLIC WHERE NICKNEV = ?;";
+			
+			$stmt = $this->conn_public->prepare($query);
+			$stmt->bind_param('s', $username);
+			$stmt->execute();
+			$result = $stmt->get_result();
 			
 			$s = '';
 			if($result->num_rows > 0)

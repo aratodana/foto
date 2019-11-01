@@ -66,23 +66,34 @@ Version: 1.1.1.2
 		public function addNewContact($username, $data, $type)
 		{
 			$sql = "INSERT INTO KONTAKTOK (TULAJ, CIM, TIPUS) VALUES ('$username', '$data', (SELECT ID FROM KONTAKT_TIPUSOK WHERE NEV='$type'));";
+
 			$this->conn_public->query($sql);
 		}
 
 		public function deleteContact($contact)
 		{
-			$sql = "DELETE FROM KONTAKTOK WHERE ID=$contact";
-			$this->conn_public->query($sql);
+			$sql = "DELETE FROM KONTAKTOK WHERE ID=?";
+			$stmt = $this->conn_private->prepare($sql);
+
+			$stmt->bind_param('s', $contact);
+
+			$stmt->execute();
+			$result = $stmt->get_result();
 			header("Location: $this->selfPage");
 		}
 
 		//Set the contacts of user
 		public function getContactsControll($userName)
 		{
-			$s = "<div class='card message_settingsCard'><h1>Elérhetőségek</h1><table class='table'>";
+			$query = "SELECT KONTAKTOK.CIM, KONTAKTOK.ID, KONTAKT_TIPUSOK.NEV FROM KONTAKTOK INNER JOIN KONTAKT_TIPUSOK ON KONTAKTOK.TIPUS = KONTAKT_TIPUSOK.ID WHERE TULAJ = ?;";
 
-			$sql = "SELECT KONTAKTOK.CIM, KONTAKTOK.ID, KONTAKT_TIPUSOK.NEV FROM KONTAKTOK INNER JOIN KONTAKT_TIPUSOK ON KONTAKTOK.TIPUS = KONTAKT_TIPUSOK.ID WHERE TULAJ = '$userName';";
-			$result = $this->conn_public->query($sql);
+
+			$stmt = $this->conn_public->prepare($query);
+			$stmt->bind_param('s', $userName);
+			$stmt->execute();
+			
+			$result = $stmt->get_result();
+			$s = "<div class='card message_settingsCard'><h1>Elérhetőségek</h1><table class='table'>";
 			if($result->num_rows > 0)
 			{
 				while($row = $result->fetch_assoc())

@@ -65,9 +65,17 @@ Version: 1.1.1.2
 		//Set the users datas
 		public function getUserSetterForm($userName)
 		{
-			$sql = "SELECT * FROM FELHASZNALO_PUBLIC WHERE NICKNEV = '$userName'";
+			$query = "SELECT * FROM FELHASZNALO_PUBLIC WHERE NICKNEV = ?";
+
+
+			$stmt = $this->conn_public->prepare($query);
+
+			$stmt->bind_param('s', $userName);
+
+			$stmt->execute();
+			$result = $stmt->get_result();
+
 			$s = "<div class='card login_settingsCard'><h1>Főbb adatok</h1>";
-			$result = $this->conn_public->query($sql);
 			if($result->num_rows > 0)
 			{
 				$row = $result->fetch_assoc();
@@ -88,8 +96,12 @@ Version: 1.1.1.2
 			$fullname= antiHackingSystem::testString($_POST['fullname']);
 			$introdution= antiHackingSystem::testString($_POST['introdution']);
 
-			$sql = "UPDATE FELHASZNALO_PUBLIC SET TELJES_NEV='$fullname', BEMUTATKOZAS='$introdution' WHERE NICKNEV='aratodana';";
-			$this->conn_public->query($sql);
+			$sql = "UPDATE FELHASZNALO_PUBLIC SET TELJES_NEV='$fullname', BEMUTATKOZAS=? WHERE NICKNEV='aratodana';";
+			$stmt = $this->conn_private->prepare($query);
+
+			$stmt->bind_param('s', $introdution);
+
+			$stmt->execute();
 		}
 	
 	}

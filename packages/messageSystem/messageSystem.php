@@ -86,8 +86,12 @@ ___  ___                                 _____           _
 		{
 			$s = "<div class='card contactOfUser'><h1>Elérhetőségek</h1><table class='table'>";
 
-			$sql = "SELECT * FROM KONTAKTOK INNER JOIN KONTAKT_TIPUSOK ON KONTAKTOK.TIPUS = KONTAKT_TIPUSOK.ID WHERE TULAJ = '$userName' AND PUBLIKUS = 1;";
-			$result = $this->conn_public->query($sql);
+			$query = "SELECT * FROM KONTAKTOK INNER JOIN KONTAKT_TIPUSOK ON KONTAKTOK.TIPUS = KONTAKT_TIPUSOK.ID WHERE TULAJ = ? AND PUBLIKUS = 1;";
+			$stmt = $this->conn_public->prepare($query);
+			$stmt->bind_param('i', $albumId);
+			$stmt->execute();
+			$result = $stmt->get_result();
+
 			if($result->num_rows > 0)
 			{
 				while($row = $result->fetch_assoc())
@@ -110,12 +114,21 @@ ___  ___                                 _____           _
 
 			$adress = $this->siteOwner;
 
-			$sql = "INSERT INTO UZENETEK (KULDO, CIMZETT, TARGY, SZOVEG) VALUES ('$sender', '$adress','$subject', '$message')";
-			$this->conn_public->query($sql);
+			$query = "INSERT INTO UZENETEK (KULDO, CIMZETT, TARGY, SZOVEG) VALUES (?, ?, ?, ?)";
+		
+			$stmt = $this->conn_public->prepare($query);
+			$stmt->bind_param('ssss', $sender, $adress, $subject, $message);
+			$stmt->execute();
 
 
-			$sql = "SELECT EMAIL FROM FELHASZNALO_PRIVATE WHERE NICKNEV = '$adress';";
-			$result = $this->conn_private->query($sql);
+			$query = "SELECT EMAIL FROM FELHASZNALO_PRIVATE WHERE NICKNEV = ?;";
+			
+			$stmt = $this->conn_public->prepare($query);
+			$stmt->bind_param('s', $adress);
+			$stmt->execute();
+			$result = $stmt->get_result();
+
+
 			if($result->num_rows == 0) die("Hiba");
 			$row = $result->fetch_assoc();
 			$emailAddress = $row['EMAIL'];
@@ -140,8 +153,13 @@ ___  ___                                 _____           _
 		{
 			$s = "<div class='card contactOfUser'><h1>Üzenetek</h1><table class='table table-hover'>";
 
-			$sql = "SELECT * FROM UZENETEK";
-			$result = $this->conn_public->query($sql);
+			$query = "SELECT * FROM UZENETEK WHERE KULDO = ? OR CIMZETT = ?";
+
+			$stmt = $this->conn_public->prepare($query);
+			$stmt->bind_param('ss', $userName, $userName);
+			$stmt->execute();
+			$result = $stmt->get_result();
+
 			if($result->num_rows > 0)
 			{
 				$s .= "<tr><th>Tárgy</th><th>Felado</th><th>Dátum</th></tr>";
@@ -171,8 +189,13 @@ ___  ___                                 _____           _
 
 		public function getMessageModalContent($messageId)
 		{
-			$sql = "SELECT * FROM UZENETEK WHERE ID = '$messageId'";
-			$result = $this->conn_public->query($sql);
+			$query = "SELECT * FROM UZENETEK WHERE ID = ?";
+			
+			$stmt = $this->conn_public->prepare($query);
+			$stmt->bind_param('s', $messageId);
+			$stmt->execute();
+			$result = $stmt->get_result();
+
 			if($result->num_rows > 0)
 			{
 				$row = $result->fetch_assoc();
